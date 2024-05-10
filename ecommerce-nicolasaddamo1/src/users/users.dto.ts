@@ -1,6 +1,6 @@
 import { PickType } from "@nestjs/swagger";
 import { MatchPassword } from "src/decorators/matchPassword.decorator";
-import { IsEmail, IsEmpty, IsNotEmpty, IsNumber, IsString, Length, Matches, MaxLength, Min, MinLength, Validate } from "class-validator";
+import { IsEmail, IsEmpty, IsNotEmpty, IsNumber, IsString, Matches, MaxLength, MinLength, Validate } from "class-validator";
 export class CreateUserDto {
     /** 
      * Debe ser un nombre entre 3 y 80 caracteres

@@ -2,7 +2,7 @@ import { AuthGuard } from 'src/auth/guards/auth.guard';
 import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './orders.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { Controller, Body,Req, Get,Post,ParseUUIDPipe, Param, UseGuards, Request } from '@nestjs/common';
+import { Controller, Body,Req, Get,Post,ParseUUIDPipe, Param, UseGuards } from '@nestjs/common';
 
 @ApiTags('Orders: ')
 @Controller('orders')

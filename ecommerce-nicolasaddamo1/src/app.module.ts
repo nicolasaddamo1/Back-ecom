@@ -4,6 +4,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { OrdersModule } from './orders/orders.module';
+import { App1Module } from './app1.module'
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CategoriesModule } from './categories/categories.module';
 import { ProductsModule } from './products/products.module';
@@ -18,6 +19,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     inject: [ConfigService],
     useFactory: (config: ConfigService) => config.get('typeorm'),
   }),
+  App1Module,
   UsersModule,
   CategoriesModule,
   ProductsModule,

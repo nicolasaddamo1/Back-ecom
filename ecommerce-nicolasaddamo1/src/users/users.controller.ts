@@ -5,7 +5,7 @@ import { RolesGuard } from "src/auth/guards/roles.guard";
 import { UsersService } from "./users.service";
 import { CreateUserDto } from "./users.dto";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
-import { Body, Controller,Delete,Get, Param, ParseIntPipe, ParseUUIDPipe, Post, Put, Query, UseGuards} from "@nestjs/common";
+import { Body, Controller,Delete,Get, Param, ParseIntPipe, ParseUUIDPipe, Put, Query, UseGuards} from "@nestjs/common";
 
 @ApiTags("Users: ")
 @Controller("users")
@@ -16,14 +16,10 @@ export class UsersController {
         @Get()
         @Roles(Role.Admin)
         @UseGuards(AuthGuard,RolesGuard)
-        getUsers(@Query("name", ) name:string, @Query("page",ParseIntPipe) page: number, @Query("limit", ParseIntPipe) limit: number) {
+        getUsers(@Query("page",ParseIntPipe) page: number, @Query("limit", ParseIntPipe) limit: number) {
         //getUsers(@Query("name") name: string, @Query("email") email: string ,@Query("password") password: string) {
-            if (name) {
-                return this.usersService.getUsersByName(name);
-            } 
-            if (page && limit) {
-                return this.usersService.getUsers(page, limit);
-            };
+
+            return this.usersService.getUsers(page, limit);
             
         }
         @ApiBearerAuth()

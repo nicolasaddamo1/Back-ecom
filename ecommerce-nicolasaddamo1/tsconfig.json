@@ -14,10 +14,17 @@
     "skipLibCheck": true,
     "strictNullChecks": false,
     "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "strict": true,
+    "noUnusedLocals": true,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "resolveJsonModule": true,
     "types":["multer"]
-  }
+  },
+  "compileOnSave": true,
+  "include": [
+    "src"
+  ]
 }

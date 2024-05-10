@@ -1,16 +1,16 @@
-import { BadRequestException, Inject, Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { UsersRepository } from "src/users/users.repository";
 import * as bcrypt from 'bcrypt'
 import { JwtService } from "@nestjs/jwt";
 import { CreateUserDto } from "src/users/users.dto";
-import { CategoriesRepository } from "src/categories/categories.repository";
-import { ProductsRepository } from "src/products/products.repository";
+// import { CategoriesRepository } from "src/categories/categories.repository";
+// import { ProductsRepository } from "src/products/products.repository";
 @Injectable()
 export class AuthService {
 constructor(private readonly userRepository: UsersRepository,
     private readonly jwtService: JwtService,
-    private readonly categoriesRepository: CategoriesRepository,
-    private readonly productsRepository: ProductsRepository
+    // private readonly categoriesRepository: CategoriesRepository,
+    // private readonly productsRepository: ProductsRepository
 
 ) {}
 
