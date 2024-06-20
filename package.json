@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "firebase-functions": "^5.0.1",
+    "postgres": "^3.4.4"
+  }
+}

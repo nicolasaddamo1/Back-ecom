@@ -1,30 +1,49 @@
 import { registerAs } from "@nestjs/config";
-import {config as dotenvConfig} from "dotenv";
-import { DataSource,DataSourceOptions } from "typeorm";
+import { config as dotenvConfig } from "dotenv";
+import { DataSource, DataSourceOptions } from "typeorm";
+import postgres from "postgres";
 
-dotenvConfig({path: "./.env.development"});
+dotenvConfig({ path: "./.env.development" });
 
-const config ={
-    type: 'postgres',
-    host: `${process.env.DB_HOST}`,
-    port: `${parseInt(process.env.DB_PORT)}`,
-    username: `${process.env.DB_USER}`,
-    password: `${process.env.DB_PASSWORD}`,
-    database: `${process.env.DB_NAME}`,
-    entities: ["dist/**/*.entity{.ts,.js}"],
-    migrations: ["dist/migrations/*{.ts,.js}"],
-    autoLoadEntities: true,
-    synchronize: true,
-    dropSchema: false
+const config = {
+  type: 'postgres',
+  host: process.env.PGHOST,
+  port: parseInt(process.env.PGPORT || '5432'), // Asegúrate de que PGPORT esté definido en el .env
+  username: process.env.PGUSER,
+  password: process.env.PGPASSWORD,
+  database: process.env.PGDATABASE,
+  entities: ["dist/**/*.entity{.ts,.js}"],
+  migrations: ["dist/migrations/*{.ts,.js}"],
+  autoLoadEntities: true,
+  synchronize: true,
+  dropSchema: false,
+  ssl: {
+    rejectUnauthorized: false
+  },
+  extra: {
+    options: `project=${process.env.ENDPOINT_ID}`,
+  },
 };
-export default registerAs('typeorm', () => config)
-export const connectionSource = new DataSource(config as DataSourceOptions)
 
+export default registerAs('typeorm', () => config);
+export const connectionSource = new DataSource(config as DataSourceOptions);
 
-    // migraciones en el package.json
-    // "typeorm":"ts-node ./node_modules/typeorm/cli",
-    // "migration:run": "npm run typeorm migration:run -- -d./src/config/typeorm.ts",
-    // "migration:generate": "npm run typeorm -- -d ./src/config/typeorm.ts migration:generate",
-    // "migration:create": "npm run typeorm migration:create",
-    // "migration:revert": "npm run typeorm -- -d ./src/config/typeorm.ts migration:revert",
-    // "migration:show":"npm run typeorm -- -d ./src/config/typeorm.ts migration:show"
+// Ejemplo adicional para comprobar la conexión
+const sql = postgres({
+  host: process.env.PGHOST,
+  database: process.env.PGDATABASE,
+  username: process.env.PGUSER,
+  password: process.env.PGPASSWORD,
+  port: parseInt(process.env.PGPORT || '5432'), // Usa PGPORT o 5432 por defecto
+  ssl: 'require',
+  connection: {
+    options: `project=${process.env.ENDPOINT_ID}`,
+  },
+});
+
+async function getPgVersion() {
+  const result = await sql`select version()`;
+  console.log(result);
+}
+
+getPgVersion();
