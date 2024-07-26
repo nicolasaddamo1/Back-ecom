@@ -33,9 +33,9 @@ export class ProductsRepository {
             },
         });
         const start =(page -1) * limit
-    const end = start + limit
+        const end = start + limit
 
-    products= products.slice(start, end)
+    products = products.slice(start, end)
     return products
     }
     getProductById(id: string) {
@@ -81,10 +81,5 @@ async addProducts(){
         await this.productsRepository.delete(id)
         return "Product deleted"
     }
-    // async preloadData() {
-    //     const categories = await this.categoriesRepository.find()
-    //     const products = await .addCategories()
-    //     this.addProducts()
 
-    // }
 }
