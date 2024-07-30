@@ -15,7 +15,7 @@ export class ProductsRepository {
         @InjectRepository(Categories)
         private categoriesRepository: Repository<Categories>,)
     {
-        const add= async()=>{
+        const add = async()=>{
             const categories = await this.categoriesRepository.find()
             if (!categories) {
                 return 'Categories not found'
