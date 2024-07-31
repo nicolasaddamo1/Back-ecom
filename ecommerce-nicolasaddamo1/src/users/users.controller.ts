@@ -17,7 +17,6 @@ export class UsersController {
         @Roles(Role.Admin)
         @UseGuards(AuthGuard,RolesGuard)
         getUsers(@Query("page",ParseIntPipe) page: number, @Query("limit", ParseIntPipe) limit: number) {
-        //getUsers(@Query("name") name: string, @Query("email") email: string ,@Query("password") password: string) {
 
             return this.usersService.getUsers(page, limit);
             
